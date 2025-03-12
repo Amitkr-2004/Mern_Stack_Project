@@ -26,7 +26,7 @@ const signUpSchema=z.object({
     .max(50,{message:"Password must be of Maximum of 50 characters"}),
 })
 
-const LoginInSchema=z.object({
+const LoginSchema=z.object({
     email:z
     .string({required_error:"Email is Required"})
     .trim()
@@ -41,4 +41,4 @@ const LoginInSchema=z.object({
 
 })
 
-module.exports={signUpSchema,LoginInSchema};
+module.exports={signUpSchema,LoginSchema};

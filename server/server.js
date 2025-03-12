@@ -10,7 +10,7 @@ const AdminRoute=require("./router/admin_router.js")
 const cors=require("cors")
 
 const corsOption = {
-    origin:"http://localhost:5173",
+    origin:"http://localhost:5176",
     methods:"POST,GET,PUT,PATCH,DELETE",
     credentials:true,
 }
