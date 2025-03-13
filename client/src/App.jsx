@@ -13,13 +13,15 @@ import { AdminLayout } from "./components/layouts/Admin_Layout";
 import { AdminUsers } from "./Pages/Admin_Users";
 import { AdminContact } from "./Pages/Admin_Contact";
 import { AdminUpdate } from "./Pages/Admin_Update";
+import { PaymentFailed } from "./Pages/paymentFailed";
+import { PaymentSuccess } from "./Pages/paymentSuccess";
 
 const App = () =>{
   return(
     <>
 
   <BrowserRouter>
-  <Navbar />
+  <Navbar />  
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/contact" element={<Contact />}/>
@@ -28,6 +30,8 @@ const App = () =>{
       <Route path="/register" element={<Register />}/>
       <Route path="/login" element={<Login />}/>
       <Route path="/logout" element={<Logout />} />
+      <Route path="/paymentSuccess" element={<PaymentSuccess />} />
+      <Route path="/paymentFailed" element={<PaymentFailed />} />
       <Route path="*" element={<Error />}/>
 
       {/* Nested route for admin panel*/}

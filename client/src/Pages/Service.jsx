@@ -1,6 +1,22 @@
 import { useAuth } from "../store/auth"
+import axios from 'axios'
 
 export const Service = () => {
+
+    const handlePayment = async (price) =>{
+        const data = {
+          name: "John Doe",
+          mobileNumber:1234567890,
+          amount:price,
+        }
+        try {
+          const response = await axios.post('http://localhost:5000/api/data/service/createOrder', data)
+          console.log(response.data)
+          window.location.href = response.data.url
+        } catch (error) {
+          console.log("error in payment", error)
+        }
+      }
 
     const { services } = useAuth();
     return (
@@ -33,6 +49,13 @@ export const Service = () => {
                                     </div>
                                     <h2>{service}</h2>
                                     <p>{description}</p>
+                                    <div>
+                                       <button onClick={(()=>{
+                                            handlePayment(price)
+                                       })}>
+                                       Pay Now
+                                       </button>  
+                                    </div>
                                 </div>
                             </div>
                         )
