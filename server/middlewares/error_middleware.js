@@ -3,7 +3,7 @@ const errorMiddleware = (err,req,res,next) =>{
     const message=err.message || "Backend Error";
     const extraMessage=err.extraMessage || "Error from Backend";
 
-    return res.status(status).json({message,extraMessage});
+    return res.status(status).send({message,extraMessage});
     
 } ;
 

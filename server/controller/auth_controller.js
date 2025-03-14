@@ -38,7 +38,7 @@ const register = async(req,res) =>{
         });
     }
     catch(err){
-        res.status(500).send("Internal Server error")
+        next(err)
     }
 }
 /*-------
@@ -46,6 +46,7 @@ const register = async(req,res) =>{
 -------*/
 const login = async(req,res)=>{
     try{
+        console.log(req.body);
         const {email,password}=req.body;
 
         const UserExist=await User.findOne({email});
@@ -53,22 +54,24 @@ const login = async(req,res)=>{
         if(!UserExist){
             return res.status(422).json({message:"User doesn't exist"});
         }
-
-        const user=await UserExist.comparePassword(password)    //comparing the password in user_models by using function comparePassword
-
-        if(user){
-            res.status(201).json({
-                msg:"Loginned successfully",    
-                userID:UserExist._id.toString(),
-                token: await UserExist.generateToken()    //generating the token
-            });
-        }
         else{
-            res.status(401).json({message:"Invalid email or password"});
+
+            const user=await UserExist.comparePassword(password)    //comparing the password in user_models by using function comparePassword
+
+            if(user){
+                res.status(201).send({
+                    msg:"Logined successfully",    
+                    userID:UserExist._id.toString(),
+                    token: await UserExist.generateToken()    //generating the token
+                });
+            }
+            else{
+                res.status(401).json({message:"Invalid email or password"});
+            }
         }
     }
     catch(err){
-        res.status(500).json("Internal Server error")
+        next(err)
     }
 }
 
@@ -83,7 +86,7 @@ const user = async(req,res) =>{
         res.status(200).json({userData})
     }
     catch(err){
-        res.status(400).json({msg : "Error in fething data"})
+        res.status(400).json({msg : "Error in fetching data"})
     }
 }
 

@@ -1,6 +1,7 @@
 const mongoose=require("mongoose");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
+const { TbChartHistogram } = require("react-icons/tb");
 
 const UserSchema=new mongoose.Schema({
     username:{
@@ -45,7 +46,7 @@ UserSchema.pre("save",async function(next){
 //Compare the password
 
 UserSchema.methods.comparePassword = async function(password){
-    return bcrypt.compare(password,this.password);
+    return await bcrypt.compare(password,this.password);
 }
 
 
